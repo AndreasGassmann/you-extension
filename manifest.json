@@ -1,23 +1,45 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
+  "name": "You.",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "You. password manager extension",
+  "homepage_url": "https://youpassword.com",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/you-simple-logo16px.png",
+    "48": "icons/you-simple-logo48px.png",
+    "128": "icons/you-simple-logo128px.png"
   },
   "default_locale": "en",
   "background": {
-    "scripts": ["js/lib/socket.io.js", "src/bg/background.js"],
+    "scripts": [
+      "dist/background.js"
+    ],
     "persistent": true
   },
-  "options_page": "src/options_custom/index.html",
-  "browser_action": {
-    "default_icon": "icons/icon19.png",
-    "default_title": "browser action demo",
-    "default_popup": "src/browser_action/browser_action.html"
-  }
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/content_script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "clipboardWrite",
+    "http://localhost:8545/",
+    "https://*.infura.io/",
+    "webRequest",
+    "*://*.eth/",
+    "notifications"
+  ]
 }
